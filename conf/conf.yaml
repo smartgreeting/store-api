@@ -1,0 +1,9 @@
+application:
+  address: localhost
+  port: 8009
+  mode: debug
+token:
+  secret: 123456
+  expire_time: 24
+md5:
+  secret: 123456
