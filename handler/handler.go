@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:07
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 21:37:58
+ * @LastEditTime: 2021-12-14 22:12:42
  * @Email: 17719495105@163.com
  */
 package handler
@@ -19,6 +19,6 @@ func SetupRouter() *gin.Engine {
 
 	v1Group := r.Group("v1")
 	v1Group.GET("user/getSms", userService.GetSms)
-
+	v1Group.POST("user/register", userService.Register)
 	return r
 }

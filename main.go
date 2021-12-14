@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:14:22
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 20:18:32
+ * @LastEditTime: 2021-12-13 22:20:16
  * @Email: 17719495105@163.com
  */
 package main
@@ -16,7 +16,7 @@ import (
 
 func main() {
 
-	cfg, err := utils.GetConf("./conf/conf.yaml")
+	cfg, err := utils.GetConf("conf/conf.yaml")
 	if err != nil {
 		panic(err)
 	}

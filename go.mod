@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/locales v0.14.0
 	github.com/go-playground/universal-translator v0.18.0
 	github.com/go-playground/validator/v10 v10.9.0
-	github.com/smartgreeting/store-rpc v0.0.0-20211213132506-f5e01889f87d
+	github.com/smartgreeting/store-rpc v0.0.0-20211214135507-c3a11571dc05
 	github.com/tal-tech/go-zero v1.2.4
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )
