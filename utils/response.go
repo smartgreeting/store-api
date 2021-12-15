@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:15:52
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 21:38:36
+ * @LastEditTime: 2021-12-15 19:46:57
  * @Email: 17719495105@163.com
  */
 package utils
@@ -16,21 +16,23 @@ import (
 )
 
 const (
-	Success          = 2000
-	ParamsParseError = 2001
-	RpcError         = 2002
-	InvalidToken     = 2003
-	TokenTimeout     = 2004
-	TokenParse       = 2005
+	Success           = 2000
+	ParamsParseError  = 2001
+	RpcError          = 2002
+	InvalidToken      = 2003
+	TokenTimeout      = 2004
+	TokenParse        = 2005
+	ErrorPhoneNotExit = 2006
 )
 
 var resMap = map[int]string{
-	Success:          "成功",
-	ParamsParseError: "参数格式错误",
-	RpcError:         "rpc端返回错误",
-	InvalidToken:     "无效的token",
-	TokenTimeout:     "token过期",
-	TokenParse:       "token解析失败",
+	Success:           "成功",
+	ParamsParseError:  "参数格式错误",
+	RpcError:          "rpc端返回错误",
+	InvalidToken:      "无效的token",
+	TokenTimeout:      "token过期",
+	TokenParse:        "token解析失败",
+	ErrorPhoneNotExit: "手机号码不正确",
 }
 
 func ErrorReponse(ctx *gin.Context, r interface{}) {

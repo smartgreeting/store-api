@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:15:52
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 21:38:30
+ * @LastEditTime: 2021-12-15 21:00:16
  * @Email: 17719495105@163.com
  */
 package utils
@@ -15,12 +15,12 @@ import (
 
 type Claims struct {
 	UserName string `json:"username"`
-	ID       int    `json:"id"`
+	ID       int64  `json:"id"`
 	Password string `json:"password"`
 	jwt.StandardClaims
 }
 
-func GenerateToken(id int, username, secret_password string, secret []byte, exp int) (string, error) {
+func GenerateToken(id int64, username, secret_password string, secret []byte, exp int) (string, error) {
 
 	nowTime := time.Now()
 	expireTime := nowTime.Add(time.Duration(exp) * time.Hour)

@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:33
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-13 21:37:48
+ * @LastEditTime: 2021-12-15 20:43:36
  * @Email: 17719495105@163.com
  */
 package middleware
@@ -29,7 +29,7 @@ func JWT() gin.HandlerFunc {
 		if Authorization == "" {
 			code = utils.InvalidToken
 		} else {
-			_, err := utils.ParseToken(token[1], []byte(utils.Cfg.Token.Secret))
+			claims, err := utils.ParseToken(token[1], []byte(utils.Cfg.Token.Secret))
 			if err != nil {
 
 				switch err.(*jwt.ValidationError).Errors {
@@ -38,6 +38,9 @@ func JWT() gin.HandlerFunc {
 				default:
 					code = utils.TokenParse
 				}
+			} else {
+				id := claims.ID
+				ctx.Set("userId", id)
 			}
 		}
 
