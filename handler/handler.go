@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:07
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 23:11:19
+ * @LastEditTime: 2021-12-16 21:01:09
  * @Email: 17719495105@163.com
  */
 package handler
@@ -31,6 +31,7 @@ func SetupRouter() *gin.Engine {
 		// 注册JWT
 		v1Group.Use(middleware.JWT())
 		v1Group.GET("user/userInfo", userService.GetUserInfo)
+		v1Group.PUT("user/userInfo/:id", userService.UpdateUserInfo)
 	}
 
 	return r

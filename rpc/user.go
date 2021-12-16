@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:43
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 23:03:56
+ * @LastEditTime: 2021-12-16 20:39:33
  * @Email: 17719495105@163.com
  */
 package rpc
@@ -21,6 +21,7 @@ type UserRpcInterface interface {
 	Register(ctx context.Context, in *user.RegisterReq) (*user.UserReply, error)
 	Login(ctx context.Context, in *user.LoginReq) (*user.UserReply, error)
 	GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*user.UserReply, error)
+	UpdateUserInfo(ctx context.Context, in *user.UpdateUserInfoReq) (*user.UserReply, error)
 }
 type userRpc struct {
 }
@@ -105,4 +106,25 @@ func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*us
 		CreatedAt: res.CreatedAt,
 		UpdatedAt: res.UpdatedAt,
 	}, nil
+}
+
+// 更新用户信息
+
+func (u *userRpc) UpdateUserInfo(ctx context.Context, in *user.UpdateUserInfoReq) (*user.UserReply, error) {
+	_, err := rpc.UpdateUserInfo(ctx, &user.UpdateUserInfoReq{
+		Id:        in.Id,
+		Username:  in.Username,
+		Password:  in.Password,
+		Avatar:    in.Avatar,
+		Gender:    in.Gender,
+		Phone:     in.Phone,
+		Email:     in.Email,
+		Address:   in.Address,
+		Hobbies:   in.Hobbies,
+		UpdatedAt: in.UpdatedAt,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &user.UserReply{}, nil
 }

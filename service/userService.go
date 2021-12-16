@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:50
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 23:06:24
+ * @LastEditTime: 2021-12-16 22:05:31
  * @Email: 17719495105@163.com
  */
 package service
@@ -25,6 +25,8 @@ type UserService struct{}
 func NewUserService() *UserService {
 	return &UserService{}
 }
+
+// 获取短信验证码
 func (u *UserService) GetSms(ctx *gin.Context) {
 	phone := ctx.Query("phone")
 	reg := `^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$`
@@ -45,6 +47,7 @@ func (u *UserService) GetSms(ctx *gin.Context) {
 	})
 }
 
+// 注册
 func (u *UserService) Register(ctx *gin.Context) {
 
 	var req models.Register
@@ -73,6 +76,7 @@ func (u *UserService) Register(ctx *gin.Context) {
 	})
 }
 
+// 登陆
 func (u *UserService) Login(ctx *gin.Context) {
 	var req models.Login
 	err := ctx.ShouldBindWith(&req, binding.JSON)
@@ -100,8 +104,13 @@ func (u *UserService) Login(ctx *gin.Context) {
 	})
 }
 
+// 获取用户信息
 func (u *UserService) GetUserInfo(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Query("id"))
+	// 防止A绕过token校验获取B用户信息
+	if ok := models.ValidatorUserIdFromToken(id, ctx); !ok {
+		return
+	}
 	res, err := rpc.NewUserRpc().GetUserInfo(context.TODO(), &user.GetUserInfoReq{
 		Id: uint64(id),
 	})
@@ -109,5 +118,38 @@ func (u *UserService) GetUserInfo(ctx *gin.Context) {
 		utils.ErrorReponse(ctx, err)
 		return
 	}
-	utils.SuccessResponse(ctx, res)
+	utils.SuccessResponse(ctx, models.UserMapUserInfo(res))
+}
+
+// 更新用户信息
+func (u *UserService) UpdateUserInfo(ctx *gin.Context) {
+	id, _ := strconv.Atoi(ctx.Param("id"))
+
+	if ok := models.ValidatorUserIdFromToken(id, ctx); !ok {
+		return
+	}
+	var req models.UserInfo
+
+	err := ctx.BindJSON(&req)
+	if err != nil {
+		utils.ErrorReponse(ctx, utils.ParamsParseError)
+		return
+	}
+	_, err = rpc.NewUserRpc().UpdateUserInfo(context.TODO(), &user.UpdateUserInfoReq{
+		Id:       int64(id),
+		Username: req.Username,
+		Password: utils.EncodeMd5(req.Password, []byte(utils.Cfg.Md5.Secret)),
+		Avatar:   req.Avatar,
+		Gender:   req.Gender,
+		Phone:    req.Phone,
+		Email:    req.Email,
+		Address:  req.Address,
+		Hobbies:  req.Hobbies,
+	})
+	if err != nil {
+		utils.ErrorReponse(ctx, err)
+		return
+	}
+	utils.SuccessResponse(ctx, nil)
+
 }
