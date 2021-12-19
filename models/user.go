@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 22:04:53
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-16 22:02:07
+ * @LastEditTime: 2021-12-19 18:01:04
  * @Email: 17719495105@163.com
  */
 package models
@@ -48,7 +48,6 @@ func UserMapUserInfo(u *user.UserReply) *UserInfo {
 		Email:     u.Email,
 		Address:   u.Address,
 		Hobbies:   u.Hobbies,
-		Deleted:   u.Deleted,
 		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
 	}

@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:43
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-16 20:39:33
+ * @LastEditTime: 2021-12-19 18:07:29
  * @Email: 17719495105@163.com
  */
 package rpc
@@ -26,7 +26,7 @@ type UserRpcInterface interface {
 type userRpc struct {
 }
 
-var rpc userclient.User
+var userC userclient.User
 
 func init() {
 	client := zrpc.MustNewClient(zrpc.RpcClientConf{
@@ -34,7 +34,7 @@ func init() {
 			Hosts: []string{"127.0.0.1:2379"},
 			Key:   "user.rpc"},
 	})
-	rpc = userclient.NewUser(client)
+	userC = userclient.NewUser(client)
 }
 
 func NewUserRpc() UserRpcInterface {
@@ -43,7 +43,7 @@ func NewUserRpc() UserRpcInterface {
 
 // 获取验证码
 func (u *userRpc) GetSms(ctx context.Context, in *user.GetSmsReq) (*user.UserReply, error) {
-	res, err := rpc.GetSms(ctx, &userclient.GetSmsReq{
+	res, err := userC.GetSms(ctx, &userclient.GetSmsReq{
 		Phone: in.Phone,
 	})
 	if err != nil {
@@ -57,7 +57,7 @@ func (u *userRpc) GetSms(ctx context.Context, in *user.GetSmsReq) (*user.UserRep
 // 注册
 func (u *userRpc) Register(ctx context.Context, in *user.RegisterReq) (*user.UserReply, error) {
 
-	res, err := rpc.Register(ctx, &userclient.RegisterReq{
+	res, err := userC.Register(ctx, &userclient.RegisterReq{
 		Phone:    in.Phone,
 		Password: in.Password,
 		SmsCode:  in.SmsCode,
@@ -73,7 +73,7 @@ func (u *userRpc) Register(ctx context.Context, in *user.RegisterReq) (*user.Use
 
 // 登陆
 func (u *userRpc) Login(ctx context.Context, in *user.LoginReq) (*user.UserReply, error) {
-	res, err := rpc.Login(ctx, &userclient.LoginReq{
+	res, err := userC.Login(ctx, &userclient.LoginReq{
 		Phone:    in.Phone,
 		Password: in.Password,
 	})
@@ -88,7 +88,7 @@ func (u *userRpc) Login(ctx context.Context, in *user.LoginReq) (*user.UserReply
 //获取用户信息
 func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*user.UserReply, error) {
 
-	res, err := rpc.GetUserInfo(ctx, &userclient.GetUserInfoReq{
+	res, err := userC.GetUserInfo(ctx, &userclient.GetUserInfoReq{
 		Id: in.Id,
 	})
 	if err != nil {
@@ -111,17 +111,16 @@ func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*us
 // 更新用户信息
 
 func (u *userRpc) UpdateUserInfo(ctx context.Context, in *user.UpdateUserInfoReq) (*user.UserReply, error) {
-	_, err := rpc.UpdateUserInfo(ctx, &user.UpdateUserInfoReq{
-		Id:        in.Id,
-		Username:  in.Username,
-		Password:  in.Password,
-		Avatar:    in.Avatar,
-		Gender:    in.Gender,
-		Phone:     in.Phone,
-		Email:     in.Email,
-		Address:   in.Address,
-		Hobbies:   in.Hobbies,
-		UpdatedAt: in.UpdatedAt,
+	_, err := userC.UpdateUserInfo(ctx, &user.UpdateUserInfoReq{
+		Id:       in.Id,
+		Username: in.Username,
+		Password: in.Password,
+		Avatar:   in.Avatar,
+		Gender:   in.Gender,
+		Phone:    in.Phone,
+		Email:    in.Email,
+		Address:  in.Address,
+		Hobbies:  in.Hobbies,
 	})
 	if err != nil {
 		return nil, err

@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:07
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-16 21:01:09
+ * @LastEditTime: 2021-12-19 18:20:02
  * @Email: 17719495105@163.com
  */
 package handler
@@ -21,6 +21,7 @@ func SetupRouter() *gin.Engine {
 	utils.Validator()
 
 	userService := service.NewUserService()
+	productService := service.NewProductService()
 
 	v1Group := r.Group("v1")
 
@@ -32,6 +33,7 @@ func SetupRouter() *gin.Engine {
 		v1Group.Use(middleware.JWT())
 		v1Group.GET("user/userInfo", userService.GetUserInfo)
 		v1Group.PUT("user/userInfo/:id", userService.UpdateUserInfo)
+		v1Group.GET("product/banner", productService.GetBanner)
 	}
 
 	return r

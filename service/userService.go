@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:50
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-16 22:05:31
+ * @LastEditTime: 2021-12-19 18:01:42
  * @Email: 17719495105@163.com
  */
 package service
@@ -112,7 +112,7 @@ func (u *UserService) GetUserInfo(ctx *gin.Context) {
 		return
 	}
 	res, err := rpc.NewUserRpc().GetUserInfo(context.TODO(), &user.GetUserInfoReq{
-		Id: uint64(id),
+		Id: int64(id),
 	})
 	if err != nil {
 		utils.ErrorReponse(ctx, err)
