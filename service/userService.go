@@ -32,7 +32,7 @@ func (u *UserService) GetSms(ctx *gin.Context) {
 	reg := `^1([38][0-9]|14[579]|5[^4]|16[6]|7[1-35-8]|9[189])\d{8}$`
 	rgx := regexp.MustCompile(reg)
 	if !rgx.MatchString(phone) {
-		utils.ErrorReponse(ctx, utils.ErrorPhoneNotExit)
+		utils.ErrorResponse(ctx, utils.ErrorPhoneNotExit)
 		return
 	}
 
@@ -40,7 +40,7 @@ func (u *UserService) GetSms(ctx *gin.Context) {
 		Phone: phone,
 	})
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 	}
 	utils.SuccessResponse(ctx, gin.H{
 		"smsCode": res.SmsCode,
@@ -56,7 +56,7 @@ func (u *UserService) Register(ctx *gin.Context) {
 	// 参数校验
 	if err != nil {
 
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 
@@ -68,7 +68,7 @@ func (u *UserService) Register(ctx *gin.Context) {
 	})
 	// 注册失败
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	utils.SuccessResponse(ctx, gin.H{
@@ -81,7 +81,7 @@ func (u *UserService) Login(ctx *gin.Context) {
 	var req models.Login
 	err := ctx.ShouldBindWith(&req, binding.JSON)
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	// 登陆
@@ -90,12 +90,12 @@ func (u *UserService) Login(ctx *gin.Context) {
 		Password: utils.EncodeMd5(req.Password, []byte(utils.Cfg.Md5.Secret)),
 	})
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	token, err := utils.GenerateToken(res.Id, req.Phone, utils.EncodeMd5(req.Password, []byte(utils.Cfg.Md5.Secret)), []byte(utils.Cfg.Token.Secret), utils.Cfg.Token.ExpireTime)
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	utils.SuccessResponse(ctx, gin.H{
@@ -115,7 +115,7 @@ func (u *UserService) GetUserInfo(ctx *gin.Context) {
 		Id: int64(id),
 	})
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	utils.SuccessResponse(ctx, models.UserMapUserInfo(res))
@@ -132,7 +132,7 @@ func (u *UserService) UpdateUserInfo(ctx *gin.Context) {
 
 	err := ctx.BindJSON(&req)
 	if err != nil {
-		utils.ErrorReponse(ctx, utils.ParamsParseError)
+		utils.ErrorResponse(ctx, utils.ParamsParseError)
 		return
 	}
 	_, err = rpc.NewUserRpc().UpdateUserInfo(context.TODO(), &user.UpdateUserInfoReq{
@@ -147,7 +147,7 @@ func (u *UserService) UpdateUserInfo(ctx *gin.Context) {
 		Hobbies:  req.Hobbies,
 	})
 	if err != nil {
-		utils.ErrorReponse(ctx, err)
+		utils.ErrorResponse(ctx, err)
 		return
 	}
 	utils.SuccessResponse(ctx, nil)

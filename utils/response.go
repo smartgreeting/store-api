@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:15:52
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-15 19:46:57
+ * @LastEditTime: 2021-12-22 22:10:49
  * @Email: 17719495105@163.com
  */
 package utils
@@ -35,7 +35,7 @@ var resMap = map[int]string{
 	ErrorPhoneNotExit: "手机号码不正确",
 }
 
-func ErrorReponse(ctx *gin.Context, r interface{}) {
+func ErrorResponse(ctx *gin.Context, r interface{}) {
 
 	switch v := r.(type) {
 

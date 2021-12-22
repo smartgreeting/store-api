@@ -45,7 +45,7 @@ func JWT() gin.HandlerFunc {
 		}
 
 		if code != utils.Success {
-			utils.ErrorReponse(ctx, code)
+			utils.ErrorResponse(ctx, code)
 
 			ctx.Abort()
 			return

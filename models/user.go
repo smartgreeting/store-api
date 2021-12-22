@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-14 22:04:53
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 18:01:04
+ * @LastEditTime: 2021-12-22 21:55:40
  * @Email: 17719495105@163.com
  */
 package models
@@ -33,7 +33,6 @@ type UserInfo struct {
 	Email     string `json:"email"`
 	Address   string `json:"address"`
 	Hobbies   string `json:"hobbies"`
-	Deleted   int32  `json:"deleted"`
 	CreatedAt int32  `json:"createdAt"`
 	UpdatedAt int32  `json:"updatedAt"`
 }
@@ -57,7 +56,7 @@ func ValidatorUserIdFromToken(id int, ctx *gin.Context) bool {
 	// token 中获取userId
 	userId, _ := ctx.Get("userId")
 	if id != int(userId.(int64)) {
-		utils.ErrorReponse(ctx, utils.InvalidToken)
+		utils.ErrorResponse(ctx, utils.InvalidToken)
 		return false
 	}
 	return true

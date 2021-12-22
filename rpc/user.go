@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:43
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 18:07:29
+ * @LastEditTime: 2021-12-22 21:52:39
  * @Email: 17719495105@163.com
  */
 package rpc
@@ -49,9 +49,7 @@ func (u *userRpc) GetSms(ctx context.Context, in *user.GetSmsReq) (*user.UserRep
 	if err != nil {
 		return nil, err
 	}
-	return &user.UserReply{
-		SmsCode: res.SmsCode,
-	}, nil
+	return res, nil
 }
 
 // 注册
@@ -66,9 +64,7 @@ func (u *userRpc) Register(ctx context.Context, in *user.RegisterReq) (*user.Use
 		return nil, err
 	}
 
-	return &user.UserReply{
-		Id: res.Id,
-	}, nil
+	return res, nil
 }
 
 // 登陆
@@ -80,9 +76,7 @@ func (u *userRpc) Login(ctx context.Context, in *user.LoginReq) (*user.UserReply
 	if err != nil {
 		return nil, err
 	}
-	return &user.UserReply{
-		Id: res.Id,
-	}, nil
+	return res, nil
 }
 
 //获取用户信息
@@ -94,18 +88,7 @@ func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*us
 	if err != nil {
 		return nil, err
 	}
-	return &user.UserReply{
-		Id:        res.Id,
-		Username:  res.Username,
-		Avatar:    res.Avatar,
-		Gender:    res.Gender,
-		Phone:     res.Phone,
-		Email:     res.Email,
-		Address:   res.Address,
-		Hobbies:   res.Hobbies,
-		CreatedAt: res.CreatedAt,
-		UpdatedAt: res.UpdatedAt,
-	}, nil
+	return res, nil
 }
 
 // 更新用户信息

@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-19 17:45:36
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-19 18:11:56
+ * @LastEditTime: 2021-12-22 22:03:58
  * @Email: 17719495105@163.com
  */
 package rpc
@@ -18,6 +18,8 @@ import (
 
 type ProductRpcInterface interface {
 	GetBanner(ctx context.Context, in *product.GetBannerReq) (*product.BannerReply, error)
+	GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error)
+	GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error)
 }
 
 type ProductRpc struct{}
@@ -44,7 +46,25 @@ func (p *ProductRpc) GetBanner(ctx context.Context, in *product.GetBannerReq) (*
 	if err != nil {
 		return nil, err
 	}
-	return &product.BannerReply{
-		List: res.List,
-	}, nil
+	return res, nil
+}
+
+// 获取商品
+func (p *ProductRpc) GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error) {
+	res, err := productC.GetProduct(ctx, &product.GetProductReq{
+		Id: in.Id,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// 获取商品列表
+func (p *ProductRpc) GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error) {
+	res, err := productC.GetProductList(ctx, &product.GetProductListReq{})
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }
