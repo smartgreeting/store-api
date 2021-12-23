@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-13 20:17:07
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-22 22:38:15
+ * @LastEditTime: 2021-12-23 20:52:32
  * @Email: 17719495105@163.com
  */
 package handler
@@ -37,6 +37,9 @@ func SetupRouter() *gin.Engine {
 		v1Group.GET("product/banner", productService.GetBanner)
 		v1Group.GET("product/getProduct", productService.GetProduct)
 		v1Group.GET("product/getProductList", productService.GetProductList)
+		v1Group.POST("product/increment", productService.InrementProduct)
+		v1Group.PUT("product/update/:id", productService.UpdateProduct)
+		v1Group.DELETE("product/delete/:id", productService.DeleteProduct)
 	}
 
 	return r

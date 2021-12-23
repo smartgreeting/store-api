@@ -2,7 +2,7 @@
  * @Author: lihuan
  * @Date: 2021-12-19 17:45:36
  * @LastEditors: lihuan
- * @LastEditTime: 2021-12-22 22:03:58
+ * @LastEditTime: 2021-12-23 20:29:08
  * @Email: 17719495105@163.com
  */
 package rpc
@@ -20,6 +20,9 @@ type ProductRpcInterface interface {
 	GetBanner(ctx context.Context, in *product.GetBannerReq) (*product.BannerReply, error)
 	GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error)
 	GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error)
+	InrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error)
+	UpdateProduct(ctx context.Context, in *product.ProductReq) (*product.UpdateProductReply, error)
+	DeleteProduct(ctx context.Context, in *product.DeleteProductReq) (*product.DeleteProductReply, error)
 }
 
 type ProductRpc struct{}
@@ -63,6 +66,60 @@ func (p *ProductRpc) GetProduct(ctx context.Context, in *product.GetProductReq) 
 // 获取商品列表
 func (p *ProductRpc) GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error) {
 	res, err := productC.GetProductList(ctx, &product.GetProductListReq{})
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// 新增商品
+func (p *ProductRpc) InrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error) {
+	res, err := productC.IncrementProduct(ctx, &product.ProductReq{
+		Id:        in.Id,
+		Url:       in.Url,
+		Des:       in.Des,
+		Name:      in.Name,
+		ShortName: in.ShortName,
+		Type:      in.Type,
+		Price:     in.Price,
+		Inventory: in.Inventory,
+		Discount:  in.Discount,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// 更新产品
+func (p *ProductRpc) UpdateProduct(ctx context.Context, in *product.ProductReq) (*product.UpdateProductReply, error) {
+	res, err := productC.UpdateProduct(ctx, &product.ProductReq{
+		Id:        in.Id,
+		CommentId: in.CommentId,
+		DetailId:  in.DetailId,
+		Url:       in.Url,
+		Des:       in.Des,
+		Name:      in.Name,
+		ShortName: in.ShortName,
+		Type:      in.Type,
+		Price:     in.Price,
+		Sale:      in.Sale,
+		Inventory: in.Inventory,
+		Score:     in.Score,
+		Discount:  in.Discount,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// 删除产品
+
+func (p *ProductRpc) DeleteProduct(ctx context.Context, in *product.DeleteProductReq) (*product.DeleteProductReply, error) {
+	res, err := productC.DeleteProduct(ctx, &product.DeleteProductReq{
+		Id: in.Id,
+	})
 	if err != nil {
 		return nil, err
 	}
