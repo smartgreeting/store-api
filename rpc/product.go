@@ -12,8 +12,8 @@ import (
 
 	"github.com/smartgreeting/store-rpc/product/product"
 	"github.com/smartgreeting/store-rpc/product/productclient"
-	"github.com/tal-tech/go-zero/core/discov"
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/core/discov"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type ProductRpcInterface interface {

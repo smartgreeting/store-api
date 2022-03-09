@@ -12,8 +12,8 @@ import (
 
 	"github.com/smartgreeting/store-rpc/user/user"
 	"github.com/smartgreeting/store-rpc/user/userclient"
-	"github.com/tal-tech/go-zero/core/discov"
-	"github.com/tal-tech/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/core/discov"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type UserRpcInterface interface {
