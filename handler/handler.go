@@ -31,7 +31,7 @@ func SetupRouter() *gin.Engine {
 		v1Group.POST("user/login", userService.Login)
 		// 注册JWT
 		v1Group.Use(middleware.JWT())
-		v1Group.GET("user/userInfo", userService.GetUserInfo)
+		v1Group.GET("user/userInfo", middleware.ValidatorUserIdFromToken(), userService.GetUserInfo)
 		v1Group.PUT("user/userInfo/:id", userService.UpdateUserInfo)
 		// 商品
 		v1Group.GET("product/banner", productService.GetBanner)

@@ -8,8 +8,6 @@
 package models
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/smartgreeting/store-api/utils"
 	"github.com/smartgreeting/store-rpc/user/user"
 )
 
@@ -50,14 +48,4 @@ func UserMapUserInfo(u *user.UserReply) *UserInfo {
 		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
 	}
-}
-
-func ValidatorUserIdFromToken(id int, ctx *gin.Context) bool {
-	// token 中获取userId
-	userId, _ := ctx.Get("userId")
-	if id != int(userId.(int64)) {
-		utils.ErrorResponse(ctx, utils.InvalidToken)
-		return false
-	}
-	return true
 }

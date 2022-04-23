@@ -107,10 +107,7 @@ func (u *UserService) Login(ctx *gin.Context) {
 // 获取用户信息
 func (u *UserService) GetUserInfo(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Query("id"))
-	// 防止A绕过token校验获取B用户信息
-	if ok := models.ValidatorUserIdFromToken(id, ctx); !ok {
-		return
-	}
+
 	res, err := rpc.NewUserRpc().GetUserInfo(context.TODO(), &user.GetUserInfoReq{
 		Id: int64(id),
 	})
@@ -125,9 +122,6 @@ func (u *UserService) GetUserInfo(ctx *gin.Context) {
 func (u *UserService) UpdateUserInfo(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Param("id"))
 
-	if ok := models.ValidatorUserIdFromToken(id, ctx); !ok {
-		return
-	}
 	var req models.UserInfo
 
 	err := ctx.BindJSON(&req)
