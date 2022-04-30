@@ -32,7 +32,7 @@ func SetupRouter() *gin.Engine {
 		// 注册JWT
 		v1Group.Use(middleware.JWT())
 		v1Group.GET("user/userInfo", middleware.ValidatorUserIdFromToken(), userService.GetUserInfo)
-		v1Group.PUT("user/userInfo/:id", userService.UpdateUserInfo)
+		v1Group.PUT("user/userInfo/:id", middleware.ValidatorUserIdFromToken(), userService.UpdateUserInfo)
 		// 商品
 		v1Group.GET("product/banner", productService.GetBanner)
 		v1Group.GET("product/getProduct", productService.GetProduct)

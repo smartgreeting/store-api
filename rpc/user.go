@@ -5,6 +5,7 @@
  * @LastEditTime: 2021-12-22 21:52:39
  * @Email: 17719495105@163.com
  */
+
 package rpc
 
 import (
@@ -41,7 +42,7 @@ func NewUserRpc() UserRpcInterface {
 	return &userRpc{}
 }
 
-// 获取验证码
+// GetSms 获取验证码
 func (u *userRpc) GetSms(ctx context.Context, in *user.GetSmsReq) (*user.UserReply, error) {
 	res, err := userC.GetSms(ctx, &userclient.GetSmsReq{
 		Phone: in.Phone,
@@ -52,7 +53,7 @@ func (u *userRpc) GetSms(ctx context.Context, in *user.GetSmsReq) (*user.UserRep
 	return res, nil
 }
 
-// 注册
+// Register 注册
 func (u *userRpc) Register(ctx context.Context, in *user.RegisterReq) (*user.UserReply, error) {
 
 	res, err := userC.Register(ctx, &userclient.RegisterReq{
@@ -67,7 +68,7 @@ func (u *userRpc) Register(ctx context.Context, in *user.RegisterReq) (*user.Use
 	return res, nil
 }
 
-// 登陆
+// Login 登陆
 func (u *userRpc) Login(ctx context.Context, in *user.LoginReq) (*user.UserReply, error) {
 	res, err := userC.Login(ctx, &userclient.LoginReq{
 		Phone:    in.Phone,
@@ -79,7 +80,7 @@ func (u *userRpc) Login(ctx context.Context, in *user.LoginReq) (*user.UserReply
 	return res, nil
 }
 
-//获取用户信息
+// GetUserInfo 获取用户信息
 func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*user.UserReply, error) {
 
 	res, err := userC.GetUserInfo(ctx, &userclient.GetUserInfoReq{
@@ -91,8 +92,7 @@ func (u *userRpc) GetUserInfo(ctx context.Context, in *user.GetUserInfoReq) (*us
 	return res, nil
 }
 
-// 更新用户信息
-
+// UpdateUserInfo 更新用户信息
 func (u *userRpc) UpdateUserInfo(ctx context.Context, in *user.UpdateUserInfoReq) (*user.UserReply, error) {
 	_, err := userC.UpdateUserInfo(ctx, &user.UpdateUserInfoReq{
 		Id:       in.Id,

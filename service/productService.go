@@ -5,6 +5,7 @@
  * @LastEditTime: 2021-12-23 21:58:43
  * @Email: 17719495105@163.com
  */
+
 package service
 
 import (
@@ -74,7 +75,7 @@ func (p *ProductService) InrementProduct(ctx *gin.Context) {
 		utils.ErrorResponse(ctx, utils.ParamsParseError)
 		return
 	}
-	_, err = rpc.NewProductRpc().InrementProduct(context.TODO(), &product.ProductReq{
+	_, err = rpc.NewProductRpc().IncrementProduct(context.TODO(), &product.ProductReq{
 		Id:        req.ID,
 		Url:       req.Url,
 		Des:       req.Des,

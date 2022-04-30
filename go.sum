@@ -390,8 +390,6 @@ github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPx
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
 github.com/sirupsen/logrus v1.6.0/go.mod h1:7uNnSEd1DgxDLC74fIahvMZmmYsHGZGEOFrfsX/uA88=
 github.com/sirupsen/logrus v1.8.1/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
-github.com/smartgreeting/store-rpc v0.0.0-20220111140306-02cc12f3b3f8 h1:MF1zXlB2r1FlOHBm3LTu7fpyGXkAFfTubdidjbPZugs=
-github.com/smartgreeting/store-rpc v0.0.0-20220111140306-02cc12f3b3f8/go.mod h1:dczNH97lLxvd5KTOmmg92elC7CS03sCrzna9rxsi8F4=
 github.com/smartgreeting/store-rpc v0.0.0-20220426114006-8625c6b7ec39 h1:ZUE41O+kqhPOwFYNklhVd6AK1uh8ktQF8fh0VoFwpII=
 github.com/smartgreeting/store-rpc v0.0.0-20220426114006-8625c6b7ec39/go.mod h1:u1eBRwuAU2vAS8LetzHG+MsCwH4LzyeTjqz8sBTZ/U4=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
@@ -413,7 +411,6 @@ github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5
 github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
-github.com/tal-tech/go-zero v1.2.4 h1:S0Cj69rHfIbZBVgQHnblR2dGkhz5Ij3bm1lM19kkig4=
 github.com/tal-tech/go-zero v1.2.4/go.mod h1:EHOQsRClBD4svg5mJl8iqkQn5bTMZx+AeHwkQpSjJXg=
 github.com/ugorji/go v1.1.7 h1:/68gy2h+1mWMrwZFeD1kQialdSzAb432dtpeJ42ovdo=
 github.com/ugorji/go v1.1.7/go.mod h1:kZn38zHttfInRq0xu/PH0az30d+z6vm202qpg1oXVMw=

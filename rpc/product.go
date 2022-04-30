@@ -5,6 +5,7 @@
  * @LastEditTime: 2021-12-23 20:29:08
  * @Email: 17719495105@163.com
  */
+
 package rpc
 
 import (
@@ -20,7 +21,7 @@ type ProductRpcInterface interface {
 	GetBanner(ctx context.Context, in *product.GetBannerReq) (*product.BannerReply, error)
 	GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error)
 	GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error)
-	InrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error)
+	IncrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error)
 	UpdateProduct(ctx context.Context, in *product.ProductReq) (*product.UpdateProductReply, error)
 	DeleteProduct(ctx context.Context, in *product.DeleteProductReq) (*product.DeleteProductReply, error)
 }
@@ -43,7 +44,7 @@ func NewProductRpc() ProductRpcInterface {
 	return &ProductRpc{}
 }
 
-// 获取轮播图
+// GetBanner 获取轮播图
 func (p *ProductRpc) GetBanner(ctx context.Context, in *product.GetBannerReq) (*product.BannerReply, error) {
 	res, err := productC.GetBanner(ctx, &product.GetBannerReq{})
 	if err != nil {
@@ -52,7 +53,7 @@ func (p *ProductRpc) GetBanner(ctx context.Context, in *product.GetBannerReq) (*
 	return res, nil
 }
 
-// 获取商品
+// GetProduct 获取商品
 func (p *ProductRpc) GetProduct(ctx context.Context, in *product.GetProductReq) (*product.ProductReply, error) {
 	res, err := productC.GetProduct(ctx, &product.GetProductReq{
 		Id: in.Id,
@@ -63,7 +64,7 @@ func (p *ProductRpc) GetProduct(ctx context.Context, in *product.GetProductReq) 
 	return res, nil
 }
 
-// 获取商品列表
+// GetProductList 获取商品列表
 func (p *ProductRpc) GetProductList(ctx context.Context, in *product.GetProductListReq) (*product.ProductListReply, error) {
 	res, err := productC.GetProductList(ctx, &product.GetProductListReq{})
 	if err != nil {
@@ -72,8 +73,8 @@ func (p *ProductRpc) GetProductList(ctx context.Context, in *product.GetProductL
 	return res, nil
 }
 
-// 新增商品
-func (p *ProductRpc) InrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error) {
+// IncrementProduct 新增商品
+func (p *ProductRpc) IncrementProduct(ctx context.Context, in *product.ProductReq) (*product.IncrementProductReply, error) {
 	res, err := productC.IncrementProduct(ctx, &product.ProductReq{
 		Id:        in.Id,
 		Url:       in.Url,
@@ -91,7 +92,7 @@ func (p *ProductRpc) InrementProduct(ctx context.Context, in *product.ProductReq
 	return res, nil
 }
 
-// 更新产品
+// UpdateProduct 更新产品
 func (p *ProductRpc) UpdateProduct(ctx context.Context, in *product.ProductReq) (*product.UpdateProductReply, error) {
 	res, err := productC.UpdateProduct(ctx, &product.ProductReq{
 		Id:        in.Id,
@@ -114,8 +115,7 @@ func (p *ProductRpc) UpdateProduct(ctx context.Context, in *product.ProductReq) 
 	return res, nil
 }
 
-// 删除产品
-
+// DeleteProduct 删除产品
 func (p *ProductRpc) DeleteProduct(ctx context.Context, in *product.DeleteProductReq) (*product.DeleteProductReply, error) {
 	res, err := productC.DeleteProduct(ctx, &product.DeleteProductReq{
 		Id: in.Id,
